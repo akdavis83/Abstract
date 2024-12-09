@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Abstract</title>
+  <link rel="icon" href="https://fav.farm/🌀" />
+
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="grid-container" style="position: absolute; top: 0px; left: 0px;">
+
+  <div class="cell filled" data-row="0" data-col="0"></div>
+  <div class="cell" data-row="0" data-col="1"></div>
+  <div class="cell" data-row="0" data-col="2"></div>
+  <div class="cell" data-row="0" data-col="3"></div>
+  <div class="cell filled" data-row="0" data-col="4"></div>
+  <div class="cell" data-row="1" data-col="0"></div>
+  <div class="cell" data-row="1" data-col="1"></div>
+  <div class="cell" data-row="1" data-col="2"></div>
+  <div class="cell" data-row="1" data-col="3"></div>
+  <div class="cell" data-row="1" data-col="4"></div>
+  <div class="cell" data-row="2" data-col="0"></div>
+  <div class="cell" data-row="2" data-col="1"></div>
+  <div class="cell" data-row="2" data-col="2"></div>
+  <div class="cell" data-row="2" data-col="3"></div>
+  <div class="cell" data-row="2" data-col="4"></div>
+  <div class="cell" data-row="3" data-col="0"></div>
+  <div class="cell filled" data-row="3" data-col="1"></div>
+  <div class="cell" data-row="3" data-col="2"></div>
+  <div class="cell" data-row="3" data-col="3"></div>
+  <div class="cell" data-row="3" data-col="4"></div>
+  <div class="cell filled" data-row="4" data-col="0"></div>
+  <div class="cell" data-row="4" data-col="1"></div>
+  <div class="cell" data-row="4" data-col="2"></div>
+  <div class="cell" data-row="4" data-col="3"></div>
+  <div class="cell" data-row="4" data-col="4"></div>
+</div>
+<!-- partial -->
+<a href="https://akdavis83.github.io/Picker2/"><button class="custom-btn btn-12" style="position: absolute; bottom: 50px; left: 10px;"><span>CLICK</span><span>NEXT</span></button></a>
+<!-- partial:index.partial.html -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" shape-rendering="optimizeSpeed"></svg>
+<!-- partial -->
+  <script src='https://unpkg.com/gsap@3/dist/gsap.min.js'></script>
+  <script  src="./script.js"></script>
+<script>
+  const gridContainer = document.getElementById("grid-container");
+
+const cells = document.querySelectorAll(".cell");
+
+gridContainer.addEventListener("click", function (event) {
+  const target = event.target;
+  if (!target.classList.contains("cell")) return;
+
+  const clickedRow = parseInt(target.dataset.row);
+  const clickedCol = parseInt(target.dataset.col);
+
+  cells.forEach(function (cell) {
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.col);
+
+    const distance = Math.abs(row - clickedRow) + Math.abs(col - clickedCol);
+
+    setTimeout(function () {
+      cell.classList.add("pulse");
+
+      setTimeout(function () {
+        cell.classList.remove("pulse");
+      }, 500); // Match this duration with the CSS animation duration
+    }, distance * 100); // Adjust the multiplier to control ripple speed
+  });
+});
+</script>
+</body>
+</html>
